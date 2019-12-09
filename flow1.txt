@@ -1,0 +1,102 @@
+[
+    {
+        "id": "a36c1d16.e7293",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "83871fd1.dd97c",
+        "type": "http in",
+        "z": "a36c1d16.e7293",
+        "name": "",
+        "url": "/pin4",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 110,
+        "y": 180,
+        "wires": [
+            [
+                "d50d1ec0.ea1ed"
+            ]
+        ]
+    },
+    {
+        "id": "d50d1ec0.ea1ed",
+        "type": "function",
+        "z": "a36c1d16.e7293",
+        "name": "get",
+        "func": "msg.payload=global.get(\"GPIO\");\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 270,
+        "y": 180,
+        "wires": [
+            [
+                "d0f2ab2c.6bf318",
+                "e0243623.3c4138"
+            ]
+        ]
+    },
+    {
+        "id": "d0f2ab2c.6bf318",
+        "type": "http response",
+        "z": "a36c1d16.e7293",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 460,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "e0243623.3c4138",
+        "type": "debug",
+        "z": "a36c1d16.e7293",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 570,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "5eb3d4dd.6bef2c",
+        "type": "function",
+        "z": "a36c1d16.e7293",
+        "name": "Set",
+        "func": "global.set(\"GPIO\",msg.payload)\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 280,
+        "y": 260,
+        "wires": [
+            [
+                "e0243623.3c4138"
+            ]
+        ]
+    },
+    {
+        "id": "5d3c0d92.af8304",
+        "type": "rpi-gpio in",
+        "z": "a36c1d16.e7293",
+        "name": "GPIO4",
+        "pin": "7",
+        "intype": "up",
+        "debounce": "25",
+        "read": true,
+        "x": 100,
+        "y": 280,
+        "wires": [
+            [
+                "5eb3d4dd.6bef2c"
+            ]
+        ]
+    }
+]
